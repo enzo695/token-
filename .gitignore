@@ -1,0 +1,31 @@
+# Flutter/App Folders (Keep locally, ignore on GitHub)
+android/
+ios/
+lib/
+windows/
+test/
+build/
+.dart_tool/
+.idea/
+
+# Flutter specific files
+pubspec.yaml
+pubspec.lock
+analysis_options.yaml
+.metadata
+.puro.json
+discord_token_helper.iml
+
+# Web platform source folder (already copied to root)
+web_platform/
+
+# Git related
+# .gitignore itself should be tracked!
+!.gitignore
+
+# Site files
+!index.html
+!style.css
+!script.js
+!logo.png
+!bg.png
