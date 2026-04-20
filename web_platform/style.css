@@ -1,0 +1,289 @@
+:root {
+    --primary: #5865F2; /* Discord Blue */
+    --primary-glow: rgba(88, 101, 242, 0.4);
+    --bg-dark: #0F1214;
+    --bg-card: rgba(35, 39, 42, 0.7);
+    --text-main: #FFFFFF;
+    --text-muted: #B9BBBE;
+    --accent: #00D1FF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(15, 18, 20, 0.85), rgba(15, 18, 20, 0.85)), url('bg.png');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* Hero Section */
+.hero {
+    margin-bottom: 50px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.logo-container {
+    margin-bottom: 25px;
+}
+
+.main-logo {
+    width: 100px;
+    height: 100px;
+    filter: drop-shadow(0 0 15px var(--primary-glow));
+    transition: transform 0.3s ease;
+}
+
+.main-logo:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.glitch-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 5px;
+    margin-bottom: 15px;
+    position: relative;
+    color: var(--text-main);
+    text-shadow: 0 0 10px var(--primary-glow);
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Solution Card */
+.solution-card {
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.card-glass {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.card-glass h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: var(--accent);
+}
+
+/* Steps */
+.steps {
+    display: grid;
+    gap: 20px;
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.step:hover {
+    transform: translateX(10px);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.step-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin-right: 20px;
+    font-weight: 700;
+}
+
+/* Code Box */
+.code-box {
+    background: #121416;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(88, 101, 242, 0.3);
+}
+
+.code-header {
+    background: #1e2124;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.code-header span::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #ff5f56;
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 15px 0 #ffbd2e, 30px 0 #27c93f;
+}
+
+pre {
+    padding: 20px;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    color: #8a8d90;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 150px;
+    text-align: left;
+}
+
+/* Buttons */
+.premium-btn {
+    background: linear-gradient(135deg, var(--primary) 0%, #7289da 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.premium-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--primary-glow);
+}
+
+.premium-btn:active {
+    transform: translateY(0);
+}
+
+.premium-btn.small {
+    padding: 8px 15px;
+    font-size: 0.8rem;
+}
+
+/* Footer & Contact */
+.contact-section {
+    margin-top: 60px;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.contact-section p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.discord-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--primary);
+    background: rgba(88, 101, 242, 0.1);
+    border: 1px solid var(--primary);
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: background 0.3s ease;
+}
+
+.discord-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.discord-btn img {
+    width: 20px;
+    filter: invert(1);
+}
+
+.automation-zone {
+    padding: 20px;
+    background: rgba(88, 101, 242, 0.05);
+    border-radius: 16px;
+    margin-bottom: 30px;
+}
+
+.automation-zone p {
+    margin-bottom: 20px;
+    color: var(--text-muted);
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+    margin: 40px 0;
+}
+
+.premium-btn.large {
+    width: 100%;
+    padding: 20px;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .glitch-text { font-size: 2rem; }
+    .card-glass { padding: 25px 15px; }
+    .step-number { margin-right: 12px; }
+}

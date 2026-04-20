@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Token Helper | iPhone Web Solution</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <main class="container">
+        <header class="hero">
+            <div class="logo-container">
+                <img src="logo.png" alt="Neon Store Logo" class="main-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3670/3670157.png'">
+            </div>
+            <h1 class="glitch-text" data-text="TOKEN HELPER">TOKEN HELPER</h1>
+            <p class="subtitle">A solução definitiva para pegar seu Token no iPhone sem complicação.</p>
+        </header>
+
+        <section class="solution-card">
+            <div class="card-glass">
+                <h2>🚀 Modo Rápido (Recomendado)</h2>
+                <div class="automation-zone">
+                    <p>Clique no botão abaixo para copiar o código e ir para o Discord.</p>
+                    <button id="magicBtn" class="premium-btn large">COPIAR & ABRIR DISCORD</button>
+                </div>
+                
+                <hr class="divider">
+
+                <h2>📱 Tutorial Detalhado</h2>
+                <div class="steps">
+                    <div class="step">
+                        <span class="step-number">01</span>
+                        <p>Copie o código abaixo clicando no botão azul.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">02</span>
+                        <p>Abra o <strong>Discord.com</strong> no seu Safari e faça login.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">03</span>
+                        <p>Na barra de endereços, apague tudo o que estiver lá.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">04</span>
+                        <p>Digite <code>javascript:</code> e então <strong>COLE</strong> o código que você copiou.</p>
+                    </div>
+                </div>
+
+                <div class="code-box">
+                    <div class="code-header">
+                        <span>Código do Bookmarklet</span>
+                        <button id="copyBtn" class="premium-btn small">COPIAR CÓDIGO</button>
+                    </div>
+                    <pre><code id="bookmarkletCode">javascript:(function(){let t=(webpackChunkdiscord_app.push([[''],{},e=>{for(let c in e.c)if(e.c[c].exports?.default?.getToken)t=e.c[c].exports.default.getToken();for(let a in e.c[c].exports)if(e.c[c].exports?.[a]?.getToken&&e.c[c].exports[a][Symbol.toStringTag]!=="IntlMessagesProxy")t=e.c[c].exports[a].getToken()}] )||window.localStorage.getItem('token')||window.localStorage.getItem('__auth_token')).replace(/"/g,'');if(t&&t!=='undefined'){let e=document.createElement('div');e.style='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#2c2f33;color:white;padding:30px;border-radius:15px;z-index:99999;box-shadow:0 0 20px rgba(0,0,0,0.5);border:2px solid #5865f2;text-align:center;font-family:sans-serif;width:80%';e.innerHTML='<h2 style="color:#5865f2;margin-top:0">Token Extraído!</h2><p style="word-break:break-all;background:#23272a;padding:15px;border-radius:8px;font-family:monospace;margin:20px 0">'+t+'</p><button id="closeBtn" style="background:#5865f2;color:white;border:none;padding:10px 25px;border-radius:5px;cursor:pointer;font-weight:bold">FECHAR</button>';document.body.appendChild(e);document.getElementById('closeBtn').onclick=()=>e.remove()}else{alert('Token não encontrado! Certifique-se de estar logado no site do Discord.')};})();</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <footer class="contact-section">
+            <p>Desenvolvido com excelência pela <strong>Neon Store</strong>.</p>
+            <a href="#" class="discord-btn">
+                <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord Icon">
+                CONTATO SUPORTE
+            </a>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
