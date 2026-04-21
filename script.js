@@ -33,13 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
         copyToClipboard(shortcutScript, copyShortcutBtn);
     });
 
-    magicBtn.addEventListener('click', async () => {
-        const success = await copyToClipboard(bookmarkletCode.innerText, magicBtn);
-        if (success) {
-            setTimeout(() => {
-                window.open('https://discord.com/login', '_blank');
-            }, 800);
-        }
+    magicBtn.addEventListener('click', () => {
+        window.open('https://discord.com/login', '_blank');
     });
 
     // Add some interactivity to steps
