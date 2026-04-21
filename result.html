@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Capturado | Neon Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .result-container {
+            margin-top: 10vh;
+            animation: zoomIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .token-display {
+            background: #121416;
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid var(--primary);
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 1.2rem;
+            margin: 30px 0;
+            color: var(--accent);
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <main class="container">
+        <header class="hero result-container">
+            <h1 class="glitch-text" data-text="SUCESSO!">SUCESSO!</h1>
+            <p class="subtitle">O seu Token foi extraído com segurança.</p>
+            
+            <div class="card-glass">
+                <h2>Seu Token do Discord:</h2>
+                <div id="tokenOutput" class="token-display">Carregando...</div>
+                <button id="copyTokenBtn" class="premium-btn large">COPIAR TOKEN</button>
+            </div>
+
+            <footer style="margin-top: 50px;">
+                <button onclick="window.location.href='index.html'" class="discord-btn" style="border:none; cursor:pointer">
+                    VOLTAR AO INÍCIO
+                </button>
+            </footer>
+        </header>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+            const output = document.getElementById('tokenOutput');
+            const copyBtn = document.getElementById('copyTokenBtn');
+
+            if (token) {
+                output.innerText = token;
+            } else {
+                output.innerText = "Nenhum token encontrado na URL.";
+                output.style.color = "#ff5f56";
+            }
+
+            copyBtn.onclick = async () => {
+                if (token) {
+                    await navigator.clipboard.writeText(token);
+                    copyBtn.innerText = "✅ TOKEN COPIADO!";
+                    copyBtn.style.background = "#27c93f";
+                    setTimeout(() => {
+                        copyBtn.innerText = "COPIAR TOKEN";
+                        copyBtn.style.background = "";
+                    }, 2000);
+                }
+            };
+        });
+    </script>
+</body>
+</html>
